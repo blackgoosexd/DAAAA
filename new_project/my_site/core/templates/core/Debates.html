@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialogram</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .left {
+            display: flex;
+            align-items: center;
+        }
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .nav-btn {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .nav-btn:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .debate-section {
+            background: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #007BFF;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .chat-link {
+            margin-top: 10px;
+            display: inline-block;
+            padding: 10px 15px;
+            background: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .chat-link:hover {
+            background: #0056b3;
+        }
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px; 
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .login-form, .register-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .login-form input, .register-form input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-form button, .register-form button, #loginBtn {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-form button:hover, .register-form button:hover, #loginBtn:hover {
+background-color: #0056b3;
+        }
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .auth-links a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dialogram</h1>
+        <nav>
+            <div class="left">
+                <a href="cabinet.html" id="profileBtn" class="nav-btn">Личный кабинет</a>
+                <a href="#about">О нас</a>
+                <a href="#topics">Темы</a>
+                <a href="#contact">Контакты</a>
+            </div>
+            <button id="loginBtn">Войти</button>
+        </nav>
+    </header>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLoginModal">&times;</span>
+            <h2>Авторизация</h2>
+            <form class="login-form" id="loginForm">
+                <input type="text" placeholder="Логин" required>
+                <input type="password" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+                <div class="auth-links">
+                    <a href="#" id="forgotPassword">Забыли пароль?</a>
+                    <a href="#" id="showRegisterModal">Создать аккаунт</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeRegisterModal">&times;</span>
+            <h2>Регистрация</h2>
+            <form class="register-form" id="registerForm">
+                <input type="text" placeholder="Логин" required>
+                <input type="password" placeholder="Пароль" required>
+                <input type="password" placeholder="Подтвердите пароль" required>
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="about" class="debate-section">
+            <h2>О нас</h2>
+            <p>Мы — сообщество, посвященное обсуждению актуальных тем через дебаты. Присоединяйтесь к нам и выскажите свое мнение!</p>
+        </section>
+
+        <section id="topics" class="debate-section">
+            <h2>Темы дебатов</h2>
+            <ul id="debateList">
+                <li>Тема 1: Влияние технологий на общество 
+                    <a href="pages/chat-tech.html" class="chat-link">Перейти в чат</a>
+                </li>
+                <li>Тема 2: Экологические проблемы и их решение 
+                    <a href="pages/chat-ecology.html" class="chat-link">Перейти в чат</a>
+                </li>
+                <li>Тема 3: Образование в XXI веке 
+                    <a href="pages/chat-education.html" class="chat-link">Перейти в чат</a>
+                </li>
+                <li>Тема 4: Влияние ИИ на рынок труда
+                    <a href="pages/chat-chatgpt.html" class="chat-link">Перейти в чат</a>
+                </li>
+                <li>Тема 5: Роль искусства и культуры в современном обществе
+                    <a href="pages/chat-artandculture.html" class="chat-link">Перейти в чат</a>
+                </li>
+                <li>Тема 6: Экономика
+                     <a href="pages/chat-economy.html" class="chat-link">Перейти в чат</a> 
+                </li>
+                <li>Тема 7: Спорт
+                     <a href="pages/chat-sport.html" class="chat-link">Перейти в чат</a>
+                </li>
+                <li>Тема 8: Научные исследования
+                     <a href="pages/chat-sience.html" class="chat-link">Перейти в чат</a>
+                </li>
+                <li>Тема 9: Проблема бедности
+                    <a href="pages/chat-poverty.html" class="chat-link">Перейти в чат</a>
+                </li>
+                <li>Тема 10: Машины и общественный транспорт
+                     <a href="pages/chat-cars.html" class="chat-link">Перейти в чат</a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="contact" class="debate-section">
+            <h2>Контакты</h2>
+            <p>Если у вас есть вопросы, пишите нам на email: <a href="mailto:tikima779@gmail.com">tikima779@gmail.com</a></p>
+        </section>
+    </div>
+
+    <footer>
+        <p>Все права защищены &copy; 2024</p>
+    </footer>
+
+    <script>
+        var loginModal = document.getElementById("loginModal");
+        var registerModal = document.getElementById("registerModal");
+        var loginBtn = document.getElementById("loginBtn");
+        var profileBtn = document.getElementById("profileBtn");
+        var closeLoginModal = document.getElementById("closeLoginModal");
+        var closeRegisterModal = document.getElementById("closeRegisterModal");
+        var loginForm = document.getElementById("loginForm");
+        var registerForm = document.getElementById("registerForm");
+
+        loginBtn.onclick = function() {
+            loginModal.style.display = "block";
+        }
+
+        profileBtn.onclick = function() {
+            window.location.href = "cabinet.html";
+        }
+
+        closeLoginModal.onclick = function() {
+            loginModal.style.display = "none";
+        }
+
+        closeRegisterModal.onclick = function() {
+            registerModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == loginModal) {
+                loginModal.style.display = "none";
+            }
+            if (event.target == registerModal) {
+                registerModal.style.display = "none";
+            }
+        }
+
+        loginForm.onsubmit = function(e) {
+            e.preventDefault();
+            const username = loginForm[0].value;
+            const password = loginForm[1].value;
+
+            if (localStorage.getItem(username) && localStorage.getItem(username) === password) {
+                localStorage.setItem('username', username);
+                alert('Вы успешно вошли как ' + username);
+                loginModal.style.display = "none";
+                profileBtn.style.display = "block";
+            } else {
+                alert('Неверный логин или пароль. Пожалуйста, попробуйте снова.');
+            }
+        }
+
+        registerForm.onsubmit = function(e) {
+            e.preventDefault();
+            const username = registerForm[0].value;
+            const password = registerForm[1].value;
+            const confirmPassword = registerForm[2].value;
+
+            if (password !== confirmPassword) {
+                alert("Пароли не совпадают. Пожалуйста, попробуйте снова.");
+                return;
+            }
+
+            if (!localStorage.getItem(username)) {
+                localStorage.setItem(username, password);
+                alert('Регистрация прошла успешно! Теперь вы можете войти.');
+                registerModal.style.display = "none";
+            } else {
+                alert('Этот логин уже занят.');
+            }
+        }
+
+        document.getElementById("forgotPassword").onclick = function() {
+            alert("Функция восстановления пароля пока не реализована.");
+        }
+
+        document.getElementById("showRegisterModal").onclick = function() {
+            loginModal.style.display = "none";
+            registerModal.style.display = "block";
+        }
+    </script>
+</body>
+</html>

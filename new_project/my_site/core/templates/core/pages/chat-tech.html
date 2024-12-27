@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат по теме Влияние технологий на общество</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h2 {
+            color: #007BFF;
+        }
+        #chatArea {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .message {
+            margin: 5px 0;
+        }
+        .logout-btn {
+            padding: 10px 15px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+        .logout-btn:hover {
+            background: #c9302c;
+        }
+        .input-area {
+            display: flex;
+            justify-content: space-between;
+        }
+        .input-area input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .input-area button {
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .input-area button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Влияние технологий на общество</h2>
+        <div id="chatArea">
+            <!-- Здесь будет отображаться чат -->
+        </div>
+        <div class="input-area">
+            <input type="text" id="messageInput" placeholder="Введите ваше сообщение..." />
+            <button id="sendMessageBtn">Отправить</button>
+        </div>
+        <button class="logout-btn" id="logoutBtn">Выйти</button>
+    </div>
+
+    <script>
+        const chatArea = document.getElementById("chatArea");
+        const messageInput = document.getElementById("messageInput");
+        const sendMessageBtn = document.getElementById("sendMessageBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        function addMessage(message) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            messageElement.textContent = message;
+            chatArea.appendChild(messageElement);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        sendMessageBtn.onclick = function() {
+            const message = messageInput.value.trim();
+            if (message) {
+                addMessage("Вы: " + message);
+                messageInput.value = "";
+            }
+        }
+
+        logoutBtn.onclick = function() {
+            localStorage.removeItem('username');
+
+            window.location.href = "../Debates.html";
+        }
+    </script>
+</body>
+</html>

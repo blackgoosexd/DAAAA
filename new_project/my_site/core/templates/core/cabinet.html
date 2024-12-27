@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #007BFF;
+        }
+        .profile-info {
+            margin-bottom: 20px;
+        }
+        .logout-btn {
+            padding: 10px 15px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Личный кабинет</h2>
+        <div class="profile-info">
+            <p id="welcomeMessage"></p>
+            <h3>Статистика:</h3>
+            <p>Количество дебатов: <span id="debateCount">0</span></p>
+            <p>Активные темы: <span id="activeTopics">0</span></p>
+        </div>
+        <button class="logout-btn" id="logoutBtn">Выйти</button>
+    </div>
+
+    <script>
+        const username = localStorage.getItem('username');
+        if (!username) {
+            window.location.href = "Debates.html";
+        }
+
+        document.getElementById("welcomeMessage").textContent = "Добро пожаловать, " + username + "!";
+        document.getElementById("debateCount").textContent = "5"; 
+        document.getElementById("activeTopics").textContent = "3"; 
+
+        document.getElementById("logoutBtn").onclick = function() {
+            localStorage.removeItem('username'); 
+            window.location.href = "Debates.html"; 
+        }
+    </script>
+</body>
+</html>

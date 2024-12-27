@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат по теме Машины и общественный транспорт</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        .chat-container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+        }
+        .input-container {
+            display: flex;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .input-container button {
+            padding: 10px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #007BFF;
+        }
+        .back-button:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goToHomePage()">←</button>
+    <div class="chat-container">
+        <h2>Машины и общественный транспорт</h2>
+        <div class="messages" id="messages"></div>
+        <div class="input-container">
+            <input type="text" id="messageInput" placeholder="Введите сообщение..." />
+            <button id="sendButton" onclick="sendMessage()">Отправить</button>
+        </div>
+    </div>
+
+    <script>
+        const messagesContainer = document.getElementById('messages');
+        const input = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+
+        let lastSendTime = 0;
+        const cooldown = 30000;
+
+        function addMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = `${sender}: ${message}`;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function sendMessage() {
+            const currentTime = Date.now();
+            if (currentTime - lastSendTime < cooldown) {
+                alert('Вы должны подождать 30 секунд перед отправкой следующего сообщения.');
+                return;
+            }
+
+            const message = input.value;
+            if (message) {
+                lastSendTime = currentTime;
+                addMessage('Вы', message);
+                input.value = '';
+            }
+        }
+
+        function goToHomePage() {
+            window.location.href = 'Debates.html'; // Перенаправление на главную страницу
+        }
+    </script>
+</body>
+</html>
